@@ -1,4 +1,4 @@
-﻿"""
+"""
  * Copyright 2020, Departamento de sistemas y Computación, Universidad
  * de Los Andes
  *
@@ -37,9 +37,31 @@ operación solicitada
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
-    print("2- ")
+    print('2- Hallar los n videos con más LIKES para una categoría específica')
 
+def printVideosPorCategoria(videos):
+    if (videos):
+        print('Se encontraron: ' + str(lt.size(videos)) + ' Videos.')
+        for video in lt.iterator(videos):
+            print(video['title'])
+        print("\n")
+    else:
+        print("NF")
 catalog = None
+
+def initCatalog(tipo):
+    """
+    Inicializa el catalogo de videos
+    """
+    return controller.initCatalog(tipo)
+
+
+def loadData(catalog):
+    
+    """
+    Carga los videos en la estructura de datos
+    """
+    controller.loadData(catalog)
 
 """
 Menu principal
@@ -51,8 +73,11 @@ while True:
         print("Cargando información de los archivos ....")
 
     elif int(inputs[0]) == 2:
-        pass
-
+        label = input("Categoria a buscar: ")
+        n = int(input("Ingrese el n: "))
+        videos = controller.getVideosByCategory(cont, label, n)
+    elif int(inputs[0]) == 0:
+        menu = Fals    
     else:
         sys.exit(0)
 sys.exit(0)
